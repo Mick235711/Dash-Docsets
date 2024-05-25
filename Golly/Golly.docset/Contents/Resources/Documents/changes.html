@@ -3,6 +3,222 @@
 <body bgcolor="#FFFFCE">
 
 <p>
+<font size=+1><b>Changes in version 4.3 (released May 2024)</b></font>
+
+<p>
+<ul>
+<li> Added the new Investigator rule family to the <a href="Algorithms/Super.html">Super</a> algorithm.
+<li> Adjusted Super conversion scripts to handle Investigator rules, including a new toInvestigator.lua conversion script
+     that will be mapped by default to Alt+I (Option+I on Mac) whenever Golly creates a new GollyPrefs file.
+<li> Minor improvements to error-checking and recovery in toHistory.lua and toSuper.lua conversion scripts.
+<li> Various changes to the RLE parsing code, mainly for consistency with LifeViewer
+     (see details <a href="formats.html#lvconsistency">here</a>).
+<li> Fixed a crash on Windows that could occur after disconnecting an audio device.
+<li> Fixed a potential crash in NVIDIA driver on Windows.
+<li> Fixed a crash by limiting the scale to no more than 2^(2^20) cells per pixel.
+<li> Fixed a bug that affected all multi-state hashlife algorithms
+     (changing a cell in a very large pattern could result in a corrupted universe).
+<li> Fixed some bugs handling filenames with underscores or ampersands in the Open/Run Recent submenus.
+<li> Fixed orientation of <a href="Algorithms/Larger_than_Life.html#custom">Custom</a> neighborhood
+     in the <a href="Algorithms/Larger_than_Life.html">Larger than Life</a> algorithm.
+<li> Fixed an assertion in progress bar update when downloading a file from a web server using gzip compression.
+<li> Better support for .rule files with very long lines.  An error message is now displayed if a line
+     exceeds the maximum length of 4,000 characters.
+<li> The Pattern Info window displays Unicode characters correctly (assuming the comments are UTF-8 encoded).
+<li> <a href="open:Scripts/Lua/3D.lua">3D.lua</a> has a Pattern Info command (in its View menu) which will
+     display the current pattern's comments in the help window.  You can also click on the new "i" button.
+<li> The <a href="Algorithms/Larger_than_Life.html">Larger than Life</a> algorithm now supports
+     <a href="Algorithms/Larger_than_Life.html#nbrhds">Aligned Checkerboard</a> neighborhood (ND).
+<li> New script <a href="open:Scripts/Lua/safeopenclip.lua">safeopenclip.lua</a> will attempt to open
+     the clipboard as a pattern. If the pattern contains a legacy rule it will first be converted
+     into a supported rule. If the pattern contains an unsupported rule it will be opened in a
+     benign 256 state rule so it can be manually manipulated and an HTML page with a download link to
+     the <a href="https://www.conwaylife.com/w/index.php?title=Special:AllPages&namespace=3794&from=">LifeWiki rule repository</a>
+     will appear. The default key binding for this script is Alt-O (Option-O on Mac).
+<li> Modified goto.lua to check for a number too large for Lua (if so then the script exits and
+     recommends using goto.py instead).
+<li> File > Run Clipboard displays a nicer error message if the clipboard doesn't contain Lua/Python code.
+<li> Removed optional support for Perl.
+<li> Updated Lua to version 5.4.6.
+<li> Added a query command (for <a href="lua.html#query">Lua</a> or <a href="python.html#query">Python</a>)
+     that displays a modal dialog with customizable button labels.
+<li> Lots of new patterns:<br>
+<a href="open:Patterns/Generations/g3b3s23-breeder.rle">g3b3s23-breeder.rle</a>,
+<a href="open:Patterns/Larger-than-Life/4c-212-roomba-bug.rle">4c-212-roomba-bug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/50c-spaceships.rle">50c-spaceships.rle</a>,
+<a href="open:Patterns/Larger-than-Life/996c-2-spaceship.rle">996c-2-spaceship.rle</a>,
+<a href="open:Patterns/Larger-than-Life/crystal-chaos.rle">crystal-chaos.rle</a>,
+<a href="open:Patterns/Larger-than-Life/factorio-small-objects.rle">factorio-small-objects.rle</a>,
+<a href="open:Patterns/Larger-than-Life/hexagonal-grid-diagonal-solid-ship.rle">hexagonal-grid-diagonal-solid-ship.rle</a>,
+<a href="open:Patterns/Larger-than-Life/hexagonal-grid-orthogonal-solid-ship.rle">hexagonal-grid-orthogonal-solid-ship.rle</a>,
+<a href="open:Patterns/Larger-than-Life/quadratic-bugs-spaceships.rle">quadratic-bugs-spaceships.rle</a>,
+<a href="open:Patterns/Larger-than-Life/quadratic-replicating-bug.rle">quadratic-replicating-bug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/slow-backrake.rle">slow-backrake.rle</a>,
+<a href="open:Patterns/Larger-than-Life/triangular-grid-orthogonal-solid-ship.rle">triangular-grid-orthogonal-solid-ship.rle</a>,
+<a href="open:Patterns/Larger-than-Life/triangular-grid-Sierpinski-generator.rle">triangular-grid-Sierpinski-generator.rle</a>,
+<a href="open:Patterns/Life-Like/34-oscillators.rle">34-oscillators.rle</a>,
+<a href="open:Patterns/Life-Like/b3578s23-2d-replicator.rle">b3578s23-2d-replicator.rle</a>,
+<a href="open:Patterns/Life-Like/b3578s23-failed-2d-replicator.rle">b3578s23-failed-2d-replicator.rle</a>,
+<a href="open:Patterns/Life-Like/gems-c5648-spaceship.rle">gems-c5648-spaceship.rle</a>,
+<a href="open:Patterns/Life-Like/sqrt-replicator.rle">sqrt-replicator.rle</a>,
+<a href="open:Patterns/Life/Methuselahs/die-1120271.rle">die-1120271.rle</a>,
+<a href="open:Patterns/Life/Miscellaneous/three-halves-growth.rle">three-halves-growth.rle</a>,
+<a href="open:Patterns/Life/Puffers/millionaire-puffer.rle">millionaire-puffer.rle</a>,
+<a href="open:Patterns/Life/Syntheses/two-glider-collisions-lh.rle">two-glider-collisions-lh.rle</a>,
+<a href="open:Patterns/Non-Totalistic/1-cell-methuselah-538.rle">1-cell-methuselah-538.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/four-interacting-sierpinski-generators.rle">four-interacting-sierpinski-generators.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/infinite-photon-factory.rle">infinite-photon-factory.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/kite-sierpinski-generator.rle">kite-sierpinski-generator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/log3-5-fractal-generator.rle">log3-5-fractal-generator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/pascal-mod-3-generator.rle">pascal-mod-3-generator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/pascal-mod-5-generator.rle">pascal-mod-5-generator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/pascal-pseudo-mod-4-generator.rle">pascal-pseudo-mod-4-generator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/sierpinski-like-log5-12.rle">sierpinski-like-log5-12.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Fractal-Generators/sierpinski-variant-fractal.rle">sierpinski-variant-fractal.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/agaric-1.rle">agaric-1.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/agaric-2.rle">agaric-2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/bounded-rule-90-oscillator.rle">bounded-rule-90-oscillator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/comparison-2.rle">comparison-2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/comparison-3.rle">comparison-3.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/comparison-4.rle">comparison-4.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/comparison.rle">comparison.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/five-margolus-media.rle">five-margolus-media.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/five-margolus-media2.rle">five-margolus-media2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/less-obvious-medium.rle">less-obvious-medium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-duoplet-shaped-medium.rle">m10-duoplet-shaped-medium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-miniaturized.rle">m10-miniaturized.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-plus-shaped-medium.rle">m10-plus-shaped-medium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-pond-shaped-medium.rle">m10-pond-shaped-medium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-self-similarity.rle">m10-self-similarity.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-sparky-medium.rle">m10-sparky-medium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m10-spiky-medium.rle">m10-spiky-medium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/m11-miniaturized.rle">m11-miniaturized.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/modulo-2.rle">modulo-2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/modulo-3.rle">modulo-3.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/modulo-5.rle">modulo-5.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/modulo-7.rle">modulo-7.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/p3-m11-antimedium.rle">p3-m11-antimedium.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/replicator-mod-2.rle">replicator-mod-2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/replicator-mod-3.rle">replicator-mod-3.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/replicator-mod-5.rle">replicator-mod-5.rle</a>,
+<a href="open:Patterns/Non-Totalistic/MarBlocks/replicator-mod-7.rle">replicator-mod-7.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/big-pseudocyclic-whitespace-oscillator.rle">big-pseudocyclic-whitespace-oscillator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/cloverleaf-chain-emulation.rle">cloverleaf-chain-emulation.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/cloverleaf-chain.rle">cloverleaf-chain.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/loopability-104-rro.rle">loopability-104-rro.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/oblique-frontend-rro.rle">oblique-frontend-rro.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/p17490.rle">p17490.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/power-of-two-extensible-oscillators.rle">power-of-two-extensible-oscillators.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/rro-interactions-and-glider-gun.rle">rro-interactions-and-glider-gun.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/rro-p420.rle">rro-p420.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/two-cell-p195.rle">two-cell-p195.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Oscillators/two-cell-p410.rle">two-cell-p410.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/branching-triangles.rle">branching-triangles.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/chaotic-1d-replicator.rle">chaotic-1d-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/chaotic-2d-replicator-q1.rle">chaotic-2d-replicator-q1.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/chaotic-2d-replicator-q2.rle">chaotic-2d-replicator-q2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/chaotic-2d-replicator-r1.rle">chaotic-2d-replicator-r1.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/chaotic-2d-replicator-r2.rle">chaotic-2d-replicator-r2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/fading-plus-shapes.rle">fading-plus-shapes.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/flying-sierpinski-triangles.rle">flying-sierpinski-triangles.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/fractal-envelope.rle">fractal-envelope.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/glider-emitting-linear-replicator.rle">glider-emitting-linear-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/lightspeed-rule-150-replicator.rle">lightspeed-rule-150-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/linear-replicator-with-replicating-strings.rle">linear-replicator-with-replicating-strings.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/looping-bee.rle">looping-bee.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/one-and-a-half-fractal.rle">one-and-a-half-fractal.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/partial-fractal-tracer.rle">partial-fractal-tracer.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/polyglot-replicator.rle">polyglot-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/quadratic-replicator-produces-gliders.rle">quadratic-replicator-produces-gliders.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/quadratic-replicator-puffer.rle">quadratic-replicator-puffer.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/quadraticish-ruler.rle">quadraticish-ruler.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/rhombic-ruler-resembling-replicator.rle">rhombic-ruler-resembling-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/rule-30-replicator-p2.rle">rule-30-replicator-p2.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/rule-30-replicator-p3.rle">rule-30-replicator-p3.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/smaller-sqrt-replicator.rle">smaller-sqrt-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/space-filling-Sierpinski-triangle-replicator.rle">space-filling-Sierpinski-triangle-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/space-filling-line-triangle-replicator.rle">space-filling-line-triangle-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/spaceship-producing-quadratic-replicator.rle">spaceship-producing-quadratic-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/three-way-replicator.rle">three-way-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/waves-triangle.rle">waves-triangle.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Replicators/whitespace-quadratic-replicator.rle">whitespace-quadratic-replicator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Spaceships/ironic-spaceship.rle">ironic-spaceship.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Spaceships/rebellious-lwss.rle">rebellious-lwss.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Spaceships/single-cell-slow-ship.rle">single-cell-slow-ship.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Spaceships/thighlife-replicator-based-spaceships.rle">thighlife-replicator-based-spaceships.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Unusual-Growth-Rates/cross-puffer.rle">cross-puffer.rle</a>,
+<a href="open:Patterns/Non-Totalistic/Unusual-Growth-Rates/whitespace-puffer.rle">whitespace-puffer.rle</a>,
+<a href="open:Patterns/Non-Totalistic/langton-s-ant-simulator.rle">langton-s-ant-simulator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/novelty-cross.rle">novelty-cross.rle</a>,
+<a href="open:Patterns/Non-Totalistic/rectangle-with-crystallographic-defect.rle">rectangle-with-crystallographic-defect.rle</a>,
+<a href="open:Patterns/Non-Totalistic/self-similar-radial-pattern-generator.rle">self-similar-radial-pattern-generator.rle</a>,
+<a href="open:Patterns/Non-Totalistic/strange-x.rle">strange-x.rle</a>,
+<a href="open:Patterns/Non-Totalistic/sweet-revenge.rle">sweet-revenge.rle</a>,
+<a href="open:Patterns/Non-Totalistic/temporary-superbreeder.rle">temporary-superbreeder.rle</a>,
+<a href="open:Patterns/Non-Totalistic/whitespace-breeder.rle">whitespace-breeder.rle</a>,
+<a href="open:Patterns/Other-Rules/circle-generator.rle">circle-generator.rle</a>,
+<a href="open:Patterns/Other-Rules/smosmosmosmos.rle">smosmosmosmos.rle</a>,
+<a href="open:Patterns/Other-Rules/so-many-ships-2.rle">so-many-ships-2.rle</a>,
+<a href="open:Patterns/Other-Rules/triangular-replicator-turmite.rle">triangular-replicator-turmite.rle</a>,
+<a href="open:Patterns/Other-Rules/von-neumann-merge.rle">von-neumann-merge.rle</a>,
+<a href="open:Patterns/Three-Dimensional/p126-christmas-tree.rle3">p126-christmas-tree.rle3</a>,
+<a href="open:Patterns/Three-Dimensional/rokicki-replicator-rule.rle3">rokicki-replicator-rule.rle3</a>.
+<li> Reformatted and renamed many Larger than Life and Generations patterns to use Golly native HROT format and/or an .rle extension instead of .mcl:
+<a href="open:Patterns/Generations/banner.rle">banner.rle</a>,
+<a href="open:Patterns/Generations/bloomerang.rle">bloomerang.rle</a>,
+<a href="open:Patterns/Generations/burst.rle">burst.rle</a>,
+<a href="open:Patterns/Generations/caterpillars.rle">caterpillars.rle</a>,
+<a href="open:Patterns/Generations/delta.rle">delta.rle</a>,
+<a href="open:Patterns/Generations/ebb-and-flow.rle">ebb-and-flow.rle</a>,
+<a href="open:Patterns/Generations/fireworks.rle">fireworks.rle</a>,
+<a href="open:Patterns/Generations/lava.rle">lava.rle</a>,
+<a href="open:Patterns/Generations/lines.rle">lines.rle</a>,
+<a href="open:Patterns/Generations/meteor-guns.rle">meteor-guns.rle</a>,
+<a href="open:Patterns/Generations/nova.rle">nova.rle</a>,
+<a href="open:Patterns/Generations/perfect-spiral.rle">perfect-spiral.rle</a>,
+<a href="open:Patterns/Generations/sedimental.rle">sedimental.rle</a>,
+<a href="open:Patterns/Generations/steeplechase.rle">steeplechase.rle</a>,
+<a href="open:Patterns/Generations/transers.rle">transers.rle</a>,
+<a href="open:Patterns/Generations/what-a-mess.rle">what-a-mess.rle</a>,
+<a href="open:Patterns/Larger-than-Life/blinkers.rle">blinkers.rle</a>,
+<a href="open:Patterns/Larger-than-Life/bosco.rle">bosco.rle</a>,
+<a href="open:Patterns/Larger-than-Life/bug-collection.rle">bug-collection.rle</a>,
+<a href="open:Patterns/Larger-than-Life/bug-gun.rle">bug-gun.rle</a>,
+<a href="open:Patterns/Larger-than-Life/bug-reactions.rle">bug-reactions.rle</a>,
+<a href="open:Patterns/Larger-than-Life/butterfly.rle">butterfly.rle</a>,
+<a href="open:Patterns/Larger-than-Life/globe.rle">globe.rle</a>,
+<a href="open:Patterns/Larger-than-Life/gnarl.rle">gnarl.rle</a>,
+<a href="open:Patterns/Larger-than-Life/gun-collection.rle">gun-collection.rle</a>,
+<a href="open:Patterns/Larger-than-Life/jitterbug.rle">jitterbug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/liquid-methuseblob-soup.rle">liquid-methuseblob-soup.rle</a>,
+<a href="open:Patterns/Larger-than-Life/majority.rle">majority.rle</a>,
+<a href="open:Patterns/Larger-than-Life/modern-art.rle">modern-art.rle</a>,
+<a href="open:Patterns/Larger-than-Life/r100-alien-bug.rle">r100-alien-bug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/r100-neumann-bug.rle">r100-neumann-bug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/r50-unknown-fate-bug.rle">r50-unknown-fate-bug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/r500-alien-bug.rle">r500-alien-bug.rle</a>,
+<a href="open:Patterns/Larger-than-Life/slow-ship.rle">slow-ship.rle</a>,
+<a href="open:Patterns/Larger-than-Life/soldier-bugs.rle">soldier-bugs.rle</a>,
+<a href="open:Patterns/Larger-than-Life/waffle.rle">waffle.rle</a>.
+<li> Deleted pattern: oscillator-stamp-collection-12August2022.rle<br>
+(replaced by <a href="open:Patterns/Life/Oscillators/oscillator-stamp-collection-31January2023.rle">oscillator-stamp-collection-31January2023.rle</a>).
+<li> The comments in a large number of existing patterns have been modified (broken links deleted or fixed,
+and the formatting of paragraphs made more consistent).
+<li> Added new rules required by some of the new patterns:
+<a href="open:Rules/Circle.rule">Circle</a>,
+<a href="open:Rules/Display256.rule">Display256</a>,
+<a href="open:Rules/MarBlocks-3-rep.rule">MarBlocks-3-rep</a>,
+<a href="open:Rules/MarBlocks-5-rep.rule">MarBlocks-5-rep</a>,
+<a href="open:Rules/MarBlocks-7-rep.rule">MarBlocks-7-rep</a>,
+<a href="open:Rules/MarBlocks3-OT-2x2-minimal.rule">MarBlocks3-OT-2x2-minimal</a>,
+<a href="open:Rules/MarBlocks5-OT-2x2-minimal.rule">MarBlocks5-OT-2x2-minimal</a>,
+<a href="open:Rules/MarBlocks7-OT-2x2-minimal.rule">MarBlocks7-OT-2x2-minimal</a>,
+<a href="open:Rules/SMOSMOSMOSMOS_Rule.rule">SMOSMOSMOSMOS_Rule</a>,
+<a href="open:Rules/SoManyShips2.rule">SoManyShips2</a>,
+<a href="open:Rules/TriRep.rule">TriRep</a>.
+</ul>
+
+<p>
 <font size=+1><b>Changes in version 4.2 (released August 2022)</b></font>
 
 <p>
@@ -17,12 +233,13 @@
 <li> Updated Lua to version 5.4.4.
      All Lua functions that take a file path (dofile, io.open, etc) now support UTF-8 paths on Windows.
 <li> Added support for https links when downloading files from <a href="archives.html">online archives</a>.
-<li> New patterns contributed primarily by GUYTU6J, mostly in OCA (non-Conway's Life) rules, plus updates to Life stamp collections by Matthias Merzenich:<br />
+<li> New patterns contributed primarily by GUYTU6J, mostly in OCA (non-Conway's Life) rules,
+plus updates to Life stamp collections by Matthias Merzenich:<br>
 Added to Generations folder:
 <a href="open:Patterns/Generations/9-43-at-knight-rake-gun.rle">9-43-at-knight-rake-gun.rle</a>,
 <a href="open:Patterns/Generations/flying-sierpinski.rle">flying-sierpinski.rle</a>,
 <a href="open:Patterns/Generations/p8009-gun.rle">p8009-gun.rle</a>,
-<a href="open:Patterns/Generations/snake-square-oscillators.rle">snake-square-oscillators.rle</a><br />
+<a href="open:Patterns/Generations/snake-square-oscillators.rle">snake-square-oscillators.rle</a><br>
 Added to Non-Totalistic folder:
 <a href="open:Patterns/Non-Totalistic/5c101-technology.rle">5c101-technology.rle</a>,
 <a href="open:Patterns/Non-Totalistic/b2-a4s1-wavestretcher.rle">b2-a4s1-wavestretcher.rle</a>,
@@ -40,24 +257,24 @@ Added to Non-Totalistic folder:
 <a href="open:Patterns/Non-Totalistic/slant-sierpinski-generator.rle">slant-sierpinski-generator.rle</a>,
 <a href="open:Patterns/Non-Totalistic/slow-expanding-box.rle">slow-expanding-box.rle</a>,
 <a href="open:Patterns/Non-Totalistic/sparse-c7.rle">sparse-c7.rle</a>,
-<a href="open:Patterns/Non-Totalistic/w110-rosary-example.rle">w110-rosary-example.rle</a><br />
+<a href="open:Patterns/Non-Totalistic/w110-rosary-example.rle">w110-rosary-example.rle</a><br>
 Added to Non-Totalistic/Guns folder:
 <a href="open:Patterns/Non-Totalistic/Guns/atpp-48c336-repship-p4032-gun.rle">atpp-48c336-repship-p4032-gun.rle</a>,
 <a href="open:Patterns/Non-Totalistic/Guns/glider-24mer-gun.rle">glider-24mer-gun.rle</a>,
-<a href="open:Patterns/Non-Totalistic/Guns/p56-gun-in-strobing-checkerboard.rle">p56-gun-in-strobing-checkerboard.rle</a><br />
+<a href="open:Patterns/Non-Totalistic/Guns/p56-gun-in-strobing-checkerboard.rle">p56-gun-in-strobing-checkerboard.rle</a><br>
 Added to Non-Totalistic/Replicators folder:
 <a href="open:Patterns/Non-Totalistic/Replicators/thickening-replicator.rle">thickening-replicator.rle</a>,
 <a href="open:Patterns/Non-Totalistic/Replicators/wave-producing-replicator.rle">wave-producing-replicator.rle</a>,
-<a href="open:Patterns/Non-Totalistic/Replicators/whitespace-adjustable-replicators.rle">whitespace-adjustable-replicators.rle</a><br />
+<a href="open:Patterns/Non-Totalistic/Replicators/whitespace-adjustable-replicators.rle">whitespace-adjustable-replicators.rle</a><br>
 Added to Life-Like folder:
 <a href="open:Patterns/Life-Like/b026s1-unidimensional-spaceships.rle">b026s1-unidimensional-spaceships.rle</a>,
 <a href="open:Patterns/Life-Like/mortality.rle">mortality.rle</a>,
-<a href="open:Patterns/Life-Like/waffle-rake.rle">waffle-rake.rle</a><br />
+<a href="open:Patterns/Life-Like/waffle-rake.rle">waffle-rake.rle</a><br>
 Updated in Life-Like folder:
-<a href="open:Patterns/Life-Like/drylife-p480-rake-gun.rle">drylife-p480-rake-gun.rle</a> (typo fix).<br />
+<a href="open:Patterns/Life-Like/drylife-p480-rake-gun.rle">drylife-p480-rake-gun.rle</a> (typo fix).<br>
 Added to Life folder:
 <a href="open:Patterns/Life/Guns/p148-B29-gun.rle">p148-B29-gun.rle</a>
-<a href="open:Patterns/Life/Breeders/20-cell-quadratic-growth.rle">20-cell-quadratic-growth.rle</a><br />
+<a href="open:Patterns/Life/Breeders/20-cell-quadratic-growth.rle">20-cell-quadratic-growth.rle</a><br>
 Updated in Life folder:
 <a href="open:Patterns/Life/Breeders/spacefiller.rle">spacefiller.rle</a>,
 <a href="open:Patterns/Life/Breeders/quartermax.rle">quartermax.rle</a>,
@@ -72,9 +289,10 @@ Updated in Life folder:
 <a href="open:Patterns/Life/Oscillators/oscillator-stamp-collection-12August2022.rle">oscillator-stamp-collection-12August2022.rle</a>
 <li> Moved/renamed <a href="open:Patterns/Non-Totalistic/Spaceships/whiteboard-17c2415-spaceship.rle">whiteboard-17c2415-spaceship.rle</a>,
 <a href="open:Patterns/Non-Totalistic/Replicators/sierpinski-builder.rle">sierpinski-builder.rle</a>,
-<a href="open:/Patterns/Other-Rules/wolfram22.mc">wolfram22.mc</a>.
+<a href="open:Patterns/Other-Rules/wolfram22.mc">wolfram22.mc</a>.
 <li> Reorganized patterns in HashLife folder into subfolders "Construction", "Eventful", and "Metacell".
-<li> Links and dates in many pattern comments updated to standard format (e.g., "https" instead of "http", no "www" before "conwaylife.com").
+<li> Links and dates in many pattern comments updated to standard format
+(e.g., "https" instead of "http", no "www" before "conwaylife.com").
 </ul>
 
 <p>
@@ -107,7 +325,8 @@ Updated in Life folder:
 <li> The performance of the QuickLife algorithm on patterns in bounded grids has been significantly improved
      (and a problem fixed that could cause a gradual slowing down of patterns in partially bounded grids).
 <li> Updated Lua to version 5.4.3.
-<li> New patterns, primarily in OCA (non-Conway's Life) rules: <a href="open:Patterns/Generations/b3-s23-g3-spaceship-breeder.rle">b3-s23-g3-spaceship-breeder.rle</a>,
+<li> New patterns, primarily in OCA (non-Conway's Life) rules:
+<a href="open:Patterns/Generations/b3-s23-g3-spaceship-breeder.rle">b3-s23-g3-spaceship-breeder.rle</a>,
 <a href="open:Patterns/Generations/isotropic-rule-wire-construction-gun.rle">isotropic-rule-wire-construction-gun.rle</a>,
 <a href="open:Patterns/Life/Methuselahs/52513m.rle">52513m.rle</a>,
 <a href="open:Patterns/Life/Oscillators/oscillator-stamp-collection-24Nov2021.rle">oscillator-stamp-collection-24Nov2021.rle</a>,
@@ -175,13 +394,11 @@ Updated in Life folder:
 <a href="open:Patterns/Non-Totalistic/justfriends-p384drifter.rle">justfriends-p384drifter.rle</a>,
 <a href="open:Patterns/Non-Totalistic/Spaceships/justfriends-spaceships.rle">justfriends-spaceships.rle</a>,
 <a href="open:Patterns/Non-Totalistic/Spaceships/p42-knightship.rle">p42-knightship.rle</a>,
-<a href="open:Patterns/Non-Totalistic/Spaceships/pondpuffer-spaceship.rle"></a>,
+<a href="open:Patterns/Non-Totalistic/Spaceships/pondpuffer-spaceship.rle">pondpuffer-spaceship.rle</a>,
 <a href="open:Patterns/Non-Totalistic/Spaceships/unit-fraction-orthogonal-spaceships.zip">unit-fraction-orthogonal-spaceships.zip</a>,
 <a href="open:Patterns/Other-Rules/calcyman-primer.zip">calcyman-primer.zip</a>,
-and <a href="open:Patterns/Life/Miscellaneous/cambrian-explosion.rle">cambrian-explosion.rle</a>.
-<li> Removed patterns <a href="open:Patterns/Life/Oscillators/DRH-oscillators.rle">DRH-oscillators.rle</a>,
-<a href="open:Patterns/Non-Totalistic/JustFriends/p8256c4dirtyrake.rle">p8256c4dirtyrake.rle</a>,
-and <a href="open:Patterns/Life/Miscellaneous/sawtooth6b.rle">sawtooth6b.rle</a>.
+<a href="open:Patterns/Life/Miscellaneous/cambrian-explosion.rle">cambrian-explosion.rle</a>.
+<li> Removed patterns: DRH-oscillators.rle, p8256c4dirtyrake.rle, sawtooth6b.rle.
 </ul>
 
 <p>
@@ -305,7 +522,7 @@ a Python 3.x (64-bit) installation to run .py scripts.
 <li> The <a href="overlay.html#oplus">oplus</a> package also has new functions for creating a menu bar, pop-up menus and radio buttons.
      Menu buttons now support custom colors and shadows.
 <li> Added a round function to Lua's <a href="lua.html#gplus">gplus</a> package.
-<li> Added timing functions to the <a href="lua.html#gplus">gplus</a> package which can be used to profile Lua scripts.</li>
+<li> Added timing functions to the <a href="lua.html#gplus">gplus</a> package which can be used to profile Lua scripts.
 <li> Added <a href="lua.html#savechanges">savechanges</a>, <a href="lua.html#settitle">settitle</a>
      and <a href="lua.html#sleep">sleep</a> commands for use in Lua scripts.
 <li> The <a href="lua.html#getevent">getevent</a> command now returns a "file" event when a user
@@ -320,7 +537,7 @@ a Python 3.x (64-bit) installation to run .py scripts.
      to make zooming in/out easier to control.
 <li> Fixed a bug when setting/getting cell values in very big hash-based universes.
 <li> Fixed a bug where patterns larger than <a href="bounded.html">bounded grids</a> were not correctly clipped.
-<li> Fixed various problems with UTF8-encoded text in the clipboard and in Lua/Python scripts.
+<li> Fixed various problems with UTF-8 encoded text in the clipboard and in Lua/Python scripts.
 <li> Fixed a bug that could crash Golly if a .rule file contained invalid XPM data.
 <li> The new credits.lua script displays animated credits and can be launched from a link in
      <a href="credits.html">Help > Credits</a>.

@@ -27,8 +27,11 @@ def main() -> None:
 
     # Prepare SQLite database
     db_path = os.path.join(golly_path, 'Contents/Resources/docSet.dsidx')
+    opt_path = os.path.join(golly_path, 'Contents/Resources/optimizedIndex.dsidx')
     if os.path.exists(db_path):
         os.remove(db_path)
+    if os.path.exists(opt_path):
+        os.remove(opt_path)
     con = sqlite3.connect(db_path)
     cur = con.cursor()
     cur.execute('CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)')

@@ -134,6 +134,19 @@ when the user clicks the "information" button in Golly's tool bar.
 Any comment lines interspersed with the pattern data will not be
 displayed.
 
+<p><a name="lvconsistency"></a>
+A few more points are worth mentioning (these ensure that Golly is consistent with LifeViewer):
+
+<p>
+<ul>
+<li> Blank lines containing only whitespace (spaces or tabs) are ignored.
+<li> Leading whitespace on any line is ignored.
+<li> A "#r" rule definition is ignored if a rule is already defined.
+<li> An error occurs if there is whitespace between a count and symbol in the pattern data.
+<li> An error occurs if a count has a leading zero.
+<li> Initial empty rows or columns in the pattern data are respected when pasting headerless RLE.
+</ul>
+
 
 <p><a name="mc"></a>&nbsp;<br>
 <font size=+1><b>Macrocell format</b></font>
@@ -357,9 +370,8 @@ matches is applied. If you want, you can write rules in the form of general
 cases and exceptions, as long as the exceptions appear first.
 
 <p>
-(This form of CA rule table representation was inspired by that in Gianluca Tempesti's
-PhD thesis:
-<a href="http://lslwww.epfl.ch/pages/embryonics/thesis/AppendixA.html">http://lslwww.epfl.ch/pages/embryonics/thesis/AppendixA.html</a>.)
+(This form of CA rule table representation was inspired by that in
+<a href="https://web.archive.org/web/20040323172343/lslwww.epfl.ch/pages/embryonics/thesis/AppendixA.html">Gianluca Tempesti's PhD thesis</a>.)
 
 <p>
 If you have a C/C++ implementation of a transition function, there is a
@@ -984,7 +996,7 @@ and shows the result in the help window.  A complex zip file is one that contain
      if those .rule files aren't present in the zip file.
 <li> Any HTML files (.htm or .html extension).
 <li> Any text files (.txt or .doc extension, or a name containing "readme").
-<li> Multiple scripts (.lua or .pl or .py extension).
+<li> Multiple scripts (.lua or .py extension).
 <li> Multiple patterns (no extension, or one that doesn't match any of the above).
 </ul>
 
